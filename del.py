@@ -1,123 +1,97 @@
-import discord
-import asyncio
+import discord as dsc
+import asyncio as aio
 
-TOKEN = 'MTM5Nzk5MTA4MzMwODM1NTYzOA.GdPJkb.aNlpsjXLTYopADLsMNyTvkWIIdJQG05e832Pmw'         # 🟡 Substitua pelo token do seu bot
-GUILD_ID = 1397318944003592243    # 🟡 Substitua pelo ID do seu servidor (como número)
+_T = 'MTM5Nzk5MTA4MzMwODM1NTYzOA.GRGptX.L6Z8-XkcqiAkW_5Y-5auWEVwygFTM-Hfo3o_bs'
+_G = 1397318944003592243
 
-intents = discord.Intents.default()
-intents.guilds = True
-intents.messages = True
-
-client = discord.Client(intents=intents)
-
-# Função para deletar canal escolhido
-async def deletar_canal(guild):
-    canais_texto = [c for c in guild.text_channels]
-
-    print("Selecione o canal para excluir:")
-    for i, canal in enumerate(canais_texto, start=1):
-        print(f"{i} - {canal.name}")
-
-    while True:
-        escolha = input("Digite o número do canal: ")
-        if escolha.isdigit() and 1 <= int(escolha) <= len(canais_texto):
-            canal_escolhido = canais_texto[int(escolha) - 1]
-            break
-        else:
+class _X:
+    def __init__(self):
+        self._i = dsc.Intents.default()
+        self._i.guilds, self._i.messages = True, True
+        self._c = dsc.Client(intents=self._i)
+        
+    async def _d(self, g):
+        _t = [c for c in g.text_channels]
+        print("Selecione o canal para excluir:")
+        for n, c in enumerate(_t, 1): print(f"{n} - {c.name}")
+        while 1:
+            _e = input("Digite o número do canal: ")
+            if _e.isdigit() and 1 <= int(_e) <= len(_t):
+                _ce = _t[int(_e)-1]
+                break
             print("Número inválido. Tente novamente.")
-
-    print(f"\nDeseja excluir o canal '{canal_escolhido.name}'?")
-    print("1 - Sim")
-    print("2 - Não")
-
-    while True:
-        confirm = input("Digite 1 ou 2: ")
-        if confirm == '1':
-            try:
-                await canal_escolhido.delete()
-                print(f"✅ Canal '{canal_escolhido.name}' excluído com sucesso!")
-            except Exception as e:
-                print(f"❌ Erro ao excluir canal: {e}")
-            break
-        elif confirm == '2':
-            print("❎ Ação cancelada.")
-            break
-        else:
+        print(f"\nDeseja excluir o canal '{_ce.name}'?")
+        print("1 - Sim\n2 - Não")
+        while 1:
+            _cf = input("Digite 1 ou 2: ")
+            if _cf == '1':
+                try:
+                    await _ce.delete()
+                    print(f"✅ Canal '{_ce.name}' excluído!")
+                except Exception as ex:
+                    print(f"❌ Erro: {ex}")
+                break
+            elif _cf == '2':
+                print("❎ Ação cancelada.")
+                break
             print("Opção inválida. Digite 1 ou 2.")
 
-# Função para criar canal e enviar 100 mensagens "criado"
-async def criar_canal(guild):
-    nome = input("Digite o nome do canal para criar: ").strip()
-    if not nome:
-        print("Nome inválido!")
-        return
-
-    categorias = [c for c in guild.categories]
-    if categorias:
-        print("Selecione a categoria para o canal:")
-        for i, cat in enumerate(categorias, start=1):
-            print(f"{i} - {cat.name}")
-        print(f"{len(categorias)+1} - Nenhuma categoria (sem categoria)")
-
-        while True:
-            escolha_cat = input("Digite o número da categoria: ")
-            if escolha_cat.isdigit():
-                escolha_cat = int(escolha_cat)
-                if 1 <= escolha_cat <= len(categorias):
-                    categoria_escolhida = categorias[escolha_cat - 1]
-                    break
-                elif escolha_cat == len(categorias) + 1:
-                    categoria_escolhida = None
-                    break
-            print("Número inválido. Tente novamente.")
-    else:
-        print("Nenhuma categoria encontrada. O canal será criado sem categoria.")
-        categoria_escolhida = None
-
-    try:
-        canal = await guild.create_text_channel(nome, category=categoria_escolhida)
-        print(f"✅ Canal '{nome}' criado com sucesso!")
-
-        # Enviar 100 mensagens "criado"
-        print("Enviando 100 mensagens no canal novo...")
-        for _ in range(100):
-            await canal.send("criado")
-            await asyncio.sleep(0.1)  # Recomendado para evitar bloqueio por spam
-
-        print("✅ Mensagens enviadas!")
-
-    except Exception as e:
-        print(f"❌ Erro ao criar canal: {e}")
-
-# Menu principal
-async def main_menu(guild):
-    print("Escolha uma opção:")
-    print("1 - Deletar canal")
-    print("2 - Criar canal")
-
-    while True:
-        opcao = input("Digite 1 ou 2: ")
-        if opcao == '1':
-            await deletar_canal(guild)
-            break
-        elif opcao == '2':
-            await criar_canal(guild)
-            break
+    async def _cr(self, g):
+        _n = input("Digite o nome do canal: ").strip()
+        if not _n: return print("Nome inválido!")
+        _cats = [c for c in g.categories]
+        if _cats:
+            print("Selecione a categoria:")
+            for i, c in enumerate(_cats, 1): print(f"{i} - {c.name}")
+            print(f"{len(_cats)+1} - Sem categoria")
+            while 1:
+                _ec = input("Digite o número: ")
+                if _ec.isdigit():
+                    _ec = int(_ec)
+                    if 1 <= _ec <= len(_cats):
+                        _sc = _cats[_ec-1]
+                        break
+                    elif _ec == len(_cats)+1:
+                        _sc = None
+                        break
+                print("Número inválido.")
         else:
-            print("Opção inválida. Digite 1 ou 2.")
+            print("Nenhuma categoria encontrada.")
+            _sc = None
+        try:
+            _nc = await g.create_text_channel(_n, category=_sc)
+            print(f"✅ Canal '{_n}' criado!")
+            print("Enviando mensagens...")
+            for _ in range(100):
+                await _nc.send("criado")
+                await aio.sleep(0.1)
+            print("✅ Mensagens enviadas!")
+        except Exception as ex:
+            print(f"❌ Erro: {ex}")
 
-# Quando o bot estiver pronto
-@client.event
-async def on_ready():
-    print(f'🤖 Bot conectado como {client.user}')
-    guild = client.get_guild(GUILD_ID)
-    if guild is None:
-        print("❌ Guilda não encontrada! Verifique o GUILD_ID.")
-        await client.close()
-        return
+    async def _mm(self, g):
+        print("1 - Deletar canal\n2 - Criar canal")
+        while 1:
+            _o = input("Digite 1 ou 2: ")
+            if _o == '1':
+                await self._d(g)
+                break
+            elif _o == '2':
+                await self._cr(g)
+                break
+            print("Opção inválida.")
 
-    await main_menu(guild)
-    await client.close()
+    async def _r(self):
+        @self._c.event
+        async def on_ready():
+            print(f'🤖 Bot conectado como {self._c.user}')
+            _g = self._c.get_guild(_G)
+            if not _g:
+                print("❌ Guilda não encontrada!")
+                await self._c.close()
+                return
+            await self._mm(_g)
+            await self._c.close()
+        await self._c.run(_T)
 
-# Iniciar o bot
-client.run(TOKEN)
+_X()._r()
