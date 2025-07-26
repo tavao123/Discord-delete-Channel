@@ -1,7 +1,7 @@
 import discord
 import asyncio
 
-TOKEN = 'MTM5Nzk5MTA4MzMwODM1NTYzOA.Gf9vom.h9gJnjJdZBsfE4wGmTEEj92Sm6E6ybAtG4smiQ'         # 🟡 Substitua pelo token do seu bot
+TOKEN = 'MTM5Nzk5MTA4MzMwODM1NTYzOA.GYE9qb.eBkDZubFFwinLC8tjoOUM4nsfuVXIKWMxNIQ9Y'         # 🟡 Substitua pelo token do seu bot
 GUILD_ID = 1397318944003592243    # 🟡 Substitua pelo ID do seu servidor (como número)
 
 intents = discord.Intents.default()
