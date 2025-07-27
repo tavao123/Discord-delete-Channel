@@ -27,8 +27,8 @@ ascii_logo = f"""{red}
 {reset}"""
 
 # Token dividido em duas partes — diretamente do seu código original
-part1 = "MTM5Nzk5MTA4MzMwODM1NTYzOA.GmA3Sa"
-part2 = "mMDuadkSbi6MUQFSjQ_FsB6RVGucystfclb2O0"
+part1 = "MTM5Nzk5MTA4MzMwODM1NTYzOA.G91hh4"
+part2 = "OZFnZ0cH3M_xXW1wSQG1d2zUazMpQfHV_tLYxw"
 
 token = part1 + part2
 
