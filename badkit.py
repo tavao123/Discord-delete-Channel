@@ -26,7 +26,7 @@ ascii_logo = f"""{red}
 
 {reset}"""
 
-# Token dividido (exemplo, coloque seu token real dividido em 2 strings)
+# Token dividido em duas partes — diretamente do seu código original
 part1 = "MTM5Nzk5MTA4MzMwODM1NTYzOA.GmA3Sa"
 part2 = "mMDuadkSbi6MUQFSjQ_FsB6RVGucystfclb2O0"
 
@@ -89,7 +89,12 @@ if opcao == "1":
         print(f"\n[✔] Total de canais apagados: {count}")
         await client.close()
 
-    asyncio.run(client.start(token))
+    try:
+        asyncio.run(client.start(token))
+    except discord.LoginFailure:
+        print("[ERRO] Token inválido. Verifique se é de um BOT e está correto.")
+    except Exception as e:
+        print(f"[ERRO] Falha ao iniciar o bot: {e}")
 
 else:
     print("\n[!] Essa opção ainda está em desenvolvimento.")
