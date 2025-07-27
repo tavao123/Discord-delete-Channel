@@ -34,7 +34,12 @@ def decode_token(obf):
     try:
         base = obf[::-1]
         step1 = ''.join([chr((ord(c) - 2) % 126) for c in base])
-        step2 = base64.b64decode(step1[::-1])
+
+        def base64_padding_fix(s):
+            return s + '=' * (-len(s) % 4)
+
+        step1_padded = base64_padding_fix(step1[::-1])
+        step2 = base64.b64decode(step1_padded)
         return step2.decode()
     except Exception as e:
         print("Erro ao decodificar o token:", e)
