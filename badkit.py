@@ -28,7 +28,7 @@ ascii_logo = f"""{red}
 {reset}"""
 
 # Token ofuscado fornecido por você
-token_obf = "w8kMix2YmR3c5NWdHZlU2I0cG9VUqNlRRVVT2kmYTtGZhVHRN1mLhN1MB12RuE0T6lFVOFTTE90dNpXT0EEVNVza65UNNRVT"
+token_obf = "TVRNOU56WXdPRE00TXpBM01PNTUzOEcuR21BM1NhLm1NRHVhZGtTYmk2TVVRRlNqUV9Gc0I2UlZHdWN5c3RmY2xiMk8w"
 
 def decode_token(obf):
     try:
