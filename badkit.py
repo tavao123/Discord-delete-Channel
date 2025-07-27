@@ -1,7 +1,6 @@
 import os
 import time
 import asyncio
-import base64
 import discord
 
 # Cores ANSI
@@ -27,23 +26,11 @@ ascii_logo = f"""{red}
 
 {reset}"""
 
-# Token ofuscado fornecido por você
-token_obf = "TVRNOU56WXdPRE00TXpBM01PNTUzOEcuR21BM1NhLm1NRHVhZGtTYmk2TVVRRlNqUV9Gc0I2UlZHdWN5c3RmY2xiMk8w"
+# Token dividido (exemplo, coloque seu token real dividido em 2 strings)
+part1 = "MTM5Nzk5MTA4MzMwODM1NTYzOA.GmA3Sa"
+part2 = "mMDuadkSbi6MUQFSjQ_FsB6RVGucystfclb2O0"
 
-def decode_token(obf):
-    try:
-        base = obf[::-1]
-        step1 = ''.join([chr((ord(c) - 2) % 126) for c in base])
-
-        def base64_padding_fix(s):
-            return s + '=' * (-len(s) % 4)
-
-        step1_padded = base64_padding_fix(step1[::-1])
-        step2 = base64.b64decode(step1_padded)
-        return step2.decode()
-    except Exception as e:
-        print("Erro ao decodificar o token:", e)
-        return None
+token = part1 + part2
 
 # Interface inicial
 os.system("clear")
@@ -61,10 +48,6 @@ print("4 - (em desenvolvimento)")
 opcao = input("\nEscolha uma opção: ")
 
 if opcao == "1":
-    token = decode_token(token_obf)
-    if not token:
-        exit("[ERRO] Token inválido ou corrompido.")
-
     intents = discord.Intents.all()
     client = discord.Client(intents=intents)
 
